@@ -1,0 +1,208 @@
+<style>
+  .required::after {
+    content: " *";
+    color: red;
+  }
+  
+  .form-control.ng-invalid.ng-touched {
+    border-color: red;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+  }
+</style>
+
+<div class="container mt-3 mb-4">
+    <div class="row mt-4 mb-4">
+        <h4 class="text-center">Registration Form</h4>
+    </div>
+    <div class="container">
+        <form #registrationForm="ngForm">
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="username" class="required">Username</label>
+                    <input type="text" name="username" id="username" [(ngModel)]="registrationObj.username" 
+                        #username="ngModel"
+                        required
+                        class="form-control" placeholder="Enter your username">
+                    <div *ngIf="username.invalid && (username.dirty || username.touched)" class="error-message">
+                        Username is required
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="email" class="required">Email</label>
+                    <input type="email" name="email" id="email" [(ngModel)]="registrationObj.email" 
+                        #email="ngModel"
+                        required
+                        email
+                        class="form-control" placeholder="Enter your email">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+                        Valid email is required
+                    </div>
+                </div>
+            </div> 
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="password" class="required">Password</label>
+                    <input type="password" name="password" id="password" [(ngModel)]="registrationObj.password" 
+                        #password="ngModel"
+                        required
+                        class="form-control" placeholder="Enter your password">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="error-message">
+                        Password is required
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>   
+    <div class="row mt-4 mb-4">
+        <div class="btn-group">
+            <button class="btn" (click)="isJobSeeker =true" [ngClass]="isJobSeeker ? 'btn-success':'btn-info'">Register as a
+                Job Seeker</button>
+            <button class="btn" (click)="isJobSeeker =false"
+                [ngClass]="!isJobSeeker ? 'btn-success':'btn-info'">Register as an Employeer</button>
+        </div>
+    </div>
+    <div class="container" *ngIf="isJobSeeker">
+        <form #jobSeekerForm="ngForm">
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="firstname" class="required">First Name</label>
+                    <input type="text" name="firstname" id="firstname" [(ngModel)]="userProfile.firstname" 
+                        #firstname="ngModel"
+                        required
+                        class="form-control" placeholder="Enter your first name">
+                    <div *ngIf="firstname.invalid && (firstname.dirty || firstname.touched)" class="error-message">
+                        First name is required
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" name="lastname" id="lastname" [(ngModel)]="userProfile.lastname" 
+                        class="form-control" placeholder="Enter your last name">
+                </div>
+            </div>
+            
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="resume">Resume URL</label>
+                    <input type="text" name="resume" id="resume" [(ngModel)]="userProfile.resume" 
+                        class="form-control" placeholder="Enter your resume URL">
+                </div>
+                <div class="col-6">
+                    <label for="contact">Mobile No</label>
+                    <input type="text" name="contact" id="contact" [(ngModel)]="userProfile.contact" 
+                        class="form-control" placeholder="Enter your mobile number">
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="location">Location</label>
+                    <select name="location" id="location" [(ngModel)]="userProfile.location" class="form-control">
+                        <option value="" disabled selected>Select your city</option>
+                        <option *ngFor="let city of indianCities" [value]="city">{{ city }}</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="dob">Date of Birth</label>
+                    <input type="date" name="dob" id="dob" [(ngModel)]="userProfile.dob" 
+                        class="form-control">
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-12">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" [(ngModel)]="userProfile.description" 
+                        class="form-control" placeholder="Write a short description"></textarea>
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="form-group">
+                    <label>Skills</label>
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Enter skills (comma-separated)"
+                           (input)="handleSkillsInput($event)">
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-12 text-end">
+                    <button class="btn btn-success" type="button" (click)="AddNewJobSeeker()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>    
+    <div class="container" *ngIf="!isJobSeeker">
+        <form #employerForm="ngForm">
+            <!-- <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="id">ID</label>
+                    <input type="number" name="id" id="id" [(ngModel)]="companyProfile.id" 
+                        class="form-control" placeholder="Enter the ID">
+                </div>
+                <div class="col-6">
+                    <label for="companyId">Company ID</label>
+                    <input type="number" name="companyId" id="companyId" [(ngModel)]="companyProfile.companyId" 
+                        class="form-control" placeholder="Enter the Company ID">
+                </div>
+            </div> -->
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="companyName" class="required">Company Name</label>
+                    <input type="text" name="companyName" id="companyName" [(ngModel)]="companyProfile.companyName" 
+                        #companyName="ngModel"
+                        required
+                        class="form-control" placeholder="Enter the Company Name">
+                    <div *ngIf="companyName.invalid && (companyName.dirty || companyName.touched)" class="error-message">
+                        Company name is required
+                    </div>
+                </div>
+                <div class="col-6">
+                    <label for="domain">Domain</label>
+                    <input type="text" name="domain" id="domain" [(ngModel)]="companyProfile.domain" 
+                        class="form-control" placeholder="Enter the Domain">
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-12">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" [(ngModel)]="companyProfile.description" 
+                        class="form-control" placeholder="Enter a brief description"></textarea>
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-6">
+                    <label for="location">Location</label>
+                    <select name="location" id="location" [(ngModel)]="companyProfile.location" class="form-control">
+                        <option value="" disabled selected>Select your city</option>
+                        <option *ngFor="let city of indianCities" [value]="city">{{ city }}</option>
+                    </select>
+                </div>
+                <div class="col-6">
+                    <label for="contact">Contact</label>
+                    <input type="text" name="contact" id="contact" [(ngModel)]="companyProfile.contact" 
+                        class="form-control" placeholder="Enter a 10-digit Contact Number">
+                </div>
+            </div>
+    
+            <div class="row mt-3 mb-4">
+                <div class="col-12 text-end">
+                    <button class="btn btn-success" type="button" (click)="AddNewEmployer()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+
+
+</div>

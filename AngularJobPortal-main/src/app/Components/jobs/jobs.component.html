@@ -1,0 +1,58 @@
+<div class="container-fluid body-background">
+    <div class="container pt-3 ">
+        <div class="row">
+         
+            <div class="col-12 job">
+                <div class="row pt-2">
+                    <div class="col-12" *ngFor="let item of jobsList" (click)="navigateToDetails(item.companyId, item.id)" style="cursor: pointer;">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <div class="row" >
+                                    <div class="col-9">
+                                        <h6 style="margin-bottom: 0;">
+                                            {{item.jobTitle}}
+                                        </h6>
+                                        <!-- <a>{{item.companyId}}</a> -->
+                                    </div>
+                                    <!-- <div class="col-3 text-end">
+                                        <i class="fa fa-bookmark" aria-hidden="true"></i>
+                                    </div> -->
+                                </div>
+                                <div class="row mt-2">
+                                    <div class="col-4">
+                                        <i class="fa fa-suitcase" aria-hidden="true"></i> {{item.workExperience}}
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="fa fa-inr" aria-hidden="true"></i> {{item.salaryRange}}
+                                    </div>
+                                    <div class="col-4">
+                                        <i class="fa fa-map-marker" aria-hidden="true"></i> {{item.location}}
+                                    </div>
+                                    <div *ngIf="showApplied" colspan="5">
+                                        <span class="badge" [ngClass]="{
+                                          'bg-warning': item.applicationStatus === 'PENDING',
+                                          'bg-success': item.applicationStatus === 'ACCEPTED',
+                                          'bg-danger': item.applicationStatus === 'REJECTED'
+                                        }">{{item.applicationStatus}}</span>
+                                    </div>
+                                </div>
+                                <div class="row pt-1">
+                                    <div class="col-12">
+                                        <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                                        <span class="text-muted"> {{item.description}}</span>
+                                    </div>
+                                </div>
+                                <div class="row pt-1">
+                                    <div class="col-6">
+                                        <small>{{item.postedOn | date:'medium'}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+        </div>
+    </div>
+</div>

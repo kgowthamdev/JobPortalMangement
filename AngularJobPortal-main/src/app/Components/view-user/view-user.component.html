@@ -1,0 +1,43 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h3>Applicant Profile</h3>
+    </div>
+    <div class="card-body">
+      <div class="row" *ngIf="userProfile">
+        <div class="col-md-8">
+          <div class="profile-details">
+            <p><strong>Name:</strong> {{userProfile.firstname}} {{userProfile.lastname}}</p>
+            <p><strong>Email:</strong> {{userProfile.email}}</p>
+            <p><strong>Contact:</strong> {{userProfile.contact}}</p>
+            <p><strong>Location:</strong> {{userProfile.location}}</p>
+            <p><strong>Description:</strong> {{userProfile.description}}</p>
+            
+            <div class="skills-section mt-3">
+              <h5>Skills</h5>
+              <div class="skills-list">
+                <span class="badge bg-primary me-2" *ngFor="let skill of userProfile.skills">
+                  {{skill}}
+                </span>
+              </div>
+            </div>
+
+            <div class="resume-section mt-3">
+              <h5>Resume</h5>
+              <a [href]="userProfile.resume" target="_blank" class="btn btn-outline-primary">
+                View Resume
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Show message if no profile found -->
+      <div class="row" *ngIf="!userProfile">
+        <div class="col-12">
+          <p class="text-center">No profile information available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

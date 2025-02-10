@@ -1,0 +1,48 @@
+<div class="container-fluid body-background">                
+<div class="container mt-4" *ngIf="jobList">
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h3>{{jobList.jobTitle}}</h3>
+      <div *ngIf="isUserEmployer">
+        <button class="btn btn-danger" (click)="deleteJob()">
+          <i class="material-icons">delete</i>
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-6">
+          <p><strong>Location:</strong> {{jobList.location}}</p>
+          <p><strong>Employment Type:</strong> {{jobList.employmentType}}</p>
+          <p><strong>Experience Required:</strong> {{jobList.workExperience}}</p>
+          <p><strong>Salary Range:</strong> {{jobList.salaryRange}}</p>
+        </div>
+        <div class="col-md-6">
+          <p><strong>Posted On:</strong> {{jobList.postedOn | date:'mediumDate'}}</p>
+          <p><strong>Applicants Required:</strong> {{jobList.noApplied}}</p>
+          <p><strong>Required Skills:</strong></p>
+          <ul class="list-inline">
+            <li class="list-inline-item badge bg-primary me-2" *ngFor="let skill of jobList.skills">
+              {{skill}}
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12">
+          <h5>Job Description</h5>
+          <p>{{jobList.description}}</p>
+        </div>
+      </div>
+      <div class="row mt-3" *ngIf="isUserJobSeeker">
+        <div class="col-12">
+          <button *ngIf="!isApplied" class="btn btn-primary" (click)="SendJobApplication()">Apply Now</button>
+          <button *ngIf="isApplied" 
+                  class="btn btn-primary" 
+                  disabled 
+                  style="background-color: #6c757d; border-color: #6c757d;">Applied</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

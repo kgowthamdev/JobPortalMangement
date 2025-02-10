@@ -1,0 +1,91 @@
+<div class="container">
+
+    <section class="text-center">
+        <h4>Create New Job Post</h4>
+    </section>
+    <div class="row mt-3 mb-4">
+
+        <!-- Job Title -->
+        <div class="col-3">
+            <label for="JobTitle">Job Title</label>
+            <input type="text" name="JobTitle" id="JobTitle" [(ngModel)]="createJobObj.jobTitle" class="form-control" placeholder="Enter Job Title">
+        </div>
+
+        <!-- Skills -->
+        <div class="col-3">
+            <label for="Skills">Skills</label>
+            <input type="text" 
+                   name="Skills" 
+                   id="Skills" 
+                   (input)="handleSkillsInput($event)" 
+                   class="form-control" 
+                   placeholder="Enter Skills (comma-separated)">
+        </div>
+
+        <!-- Work Experience -->
+        <div class="col-3">
+            <label for="WorkExperience">Work Experience</label>
+            <select name="WorkExperience" id="WorkExperience" [(ngModel)]="createJobObj.workExperience" class="form-control">
+                <option value="" selected disabled>Select Experience</option>
+                <option value="Fresher">Fresher</option>
+                <option value="Experienced">Experienced</option>
+            </select>
+        </div>
+
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <!-- Job Description -->
+        <div class="col-3">
+            <label for="JobDescription">Job Description</label>
+            <textarea name="JobDescription" id="JobDescription" [(ngModel)]="createJobObj.description" class="form-control" placeholder="Enter Job Description"></textarea>
+        </div>
+
+        <!-- Salary Range -->
+        <div class="col-3">
+            <label for="SalaryRange">Salary Range</label>
+            <input type="text" name="SalaryRange" id="SalaryRange" [(ngModel)]="createJobObj.salaryRange" class="form-control" placeholder="Enter Salary Range">
+        </div>
+
+        <!-- Location -->
+        <div class="col-3">
+            <label for="Location">Location</label>
+            <select name="location" id="location" [(ngModel)]="createJobObj.location" class="form-control">
+                <option value="" disabled selected>Select your city</option>
+                <option *ngFor="let city of this.Cities" [value]="city">{{ city }}</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-3">
+        <!-- Employment Type -->
+        <div class="col-3">
+            <label for="EmploymentType">Employment Type</label>
+            <select name="EmploymentType" id="EmploymentType" [(ngModel)]="createJobObj.employmentType" class="form-control">
+                <option value="" selected disabled>Select Employment Type</option>
+                <option value="Full-Time">Full-Time</option>
+                <option value="Part-Time">Part-Time</option>
+                <option value="Contract">Contract</option>
+            </select>
+        </div>
+
+        <!-- Number of Applications -->
+        <div class="col-3">
+            <label for="NoApplied">Number of Applications</label>
+            <input type="number" name="NoApplied" id="NoApplied" [(ngModel)]="createJobObj.noApplied" class="form-control" placeholder="Enter Number of Applications">
+        </div>
+
+        <!-- Posted On -->
+        <div class="col-3">
+            <label for="PostedOn">Posted On</label>
+            <input type="datetime-local" name="PostedOn" id="PostedOn" [(ngModel)]="createJobObj.postedOn" class="form-control">
+        </div>
+    </div>
+
+    <div class="row mt-3 mb-4">
+        <!-- Submit Button -->
+        <div class="col text-center">
+            <button class="btn btn-success" (click)="createNewJob()" type="button">Create Job</button>
+        </div>
+    </div>
+</div>

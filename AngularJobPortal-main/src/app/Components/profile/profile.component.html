@@ -1,0 +1,108 @@
+<div class="container mt-4">
+  <div class="card">
+    <div class="card-header">
+      <h3 class="profile-title">
+        Profile
+      </h3>
+      <button (click)="toggleEditMode()" class="edit-icon">
+        <i class="material-icons">edit</i>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row" *ngIf="userProfile">
+        <!-- Job Seeker Profile -->
+        <div class="col-md-6" *ngIf="isUserJobSeeker">
+          <p><strong>Name:</strong> {{userProfile.firstname}} {{userProfile.lastname}}</p>
+          <p><strong>Email:</strong> {{userProfile.email}}</p>
+          <p><strong>Phone:</strong> {{userProfile.contact}}</p>
+          <p><strong>Location:</strong> {{userProfile.location}}</p>
+          <p><strong>Resume:</strong> {{userProfile.resume}}</p>
+          <p><strong>Description:</strong> {{userProfile.description}}</p>
+          <p><strong>Skills:</strong></p>
+          <ul class="list-inline" *ngIf="userProfile.skills?.length">
+            <li class="list-inline-item badge bg-primary me-2" *ngFor="let skill of userProfile.skills">
+              {{skill}}
+            </li>
+          </ul>
+        </div>
+        
+        <!-- Employer Profile -->
+        <div class="col-md-6" *ngIf="!isUserJobSeeker">
+          <p><strong>Company Name:</strong> {{userProfile.companyName}}</p>
+          <p><strong>Email:</strong> {{userProfile.domain}}</p>
+          <p><strong>Location:</strong> {{userProfile.location}}</p>
+          <p><strong>About:</strong> {{userProfile.description}}</p>
+        </div>
+      </div>
+      <!-- Show message if no profile found -->
+      <div class="row" *ngIf="!userProfile">
+        <div class="col-12">
+          <p class="text-center">No profile information available.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="editMode" class="edit-form">
+  <div *ngIf="isUserJobSeeker">
+    <div class="form-group">
+      <label for="fname">firstName</label>
+      <input id="fname" [(ngModel)]="userProfile.firstname" placeholder="Name" />
+    </div>
+    <div class="form-group">
+      <label for="lname">Last Name</label>
+      <input id="lname" [(ngModel)]="userProfile.lastname" placeholder="Last Name" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" [(ngModel)]="userProfile.email" placeholder="Email" />
+    </div>
+    <div class="form-group">
+      <label for="contact">Phone</label>
+      <input id="contact" [(ngModel)]="userProfile.contact" placeholder="Phone" />
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <select name="location" id="location" [(ngModel)]="userProfile.location" class="form-control">
+        <option value="" disabled selected>Select your city</option>
+        <option *ngFor="let city of indianCities" [value]="city">{{ city }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="resume">Resume</label>
+      <input id="resume" [(ngModel)]="userProfile.resume" placeholder="Resume" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea id="description" [(ngModel)]="userProfile.description" placeholder="Description"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="skills">Skills</label>
+      <input id="skills" [(ngModel)]="userProfile.skills" placeholder="Skills" />
+    </div>
+  </div>
+  <div *ngIf="!isUserJobSeeker">
+    <div class="form-group">
+      <label for="fname">Compnay Name</label>
+      <input id="fname" [(ngModel)]="userProfile.companyName" placeholder="Company Name" />
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" [(ngModel)]="userProfile.domain" placeholder="Email" />
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input id="description" [(ngModel)]="userProfile.description" placeholder="Description" />
+    </div>
+    <div class="form-group">
+      <label for="location">Location</label>
+      <select name="location" id="location" [(ngModel)]="userProfile.location" class="form-control">
+        <option value="" disabled selected>Select your city</option>
+        <option *ngFor="let city of indianCities" [value]="city">{{ city }}</option>
+    </select>
+  </div>
+  </div>
+  <button (click)="saveChanges()" class="save-button">Save</button>
+</div>

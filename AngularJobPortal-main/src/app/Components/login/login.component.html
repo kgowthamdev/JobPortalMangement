@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row mt-4 mb-4">
+        <div class="col-5">
+            <label for="">UserName</label>
+            <input type="text" name="UserName" id="UserName" [(ngModel)]="loginObj.username" class="form-control">
+        </div>
+
+
+
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-5">
+            <label for="">Password</label>
+            <input type="password" name="Password" id="Password" [(ngModel)]="loginObj.password" class="form-control">
+        </div>
+    </div>
+    <div class="row mt-4 mb-4">
+        <div class="col-2">
+            <button type="button" class="btn btn-info" (click)="login()">Login</button>
+        </div>
+    </div>
+</div>
